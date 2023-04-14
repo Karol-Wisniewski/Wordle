@@ -17,6 +17,9 @@ function Header() {
             <img src={plus} alt="plus" />
         </button>
       </div>
+      <div className="header-mid">
+        Wordle
+      </div>
       <div className="header-right">
         <button>
             <img src={statistics} alt="statistics" />

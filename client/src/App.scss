@@ -1,4 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Ubuntu');
+@import url('http://fonts.googleapis.com/css?family=DynaPuff');
 
 body, html {
   margin: 0;
@@ -23,6 +24,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1em;
 
     > .header-left {
       display: flex;
@@ -80,6 +82,11 @@ body, html {
           filter: invert(-100%);
         }
       }
+    }
+
+    > .header-mid {
+      font-family: DynaPuff;
+      font-size: 1.6em;
     }
 
     > .header-right {
@@ -172,24 +179,30 @@ body, html {
         align-items: center;
         justify-content: center;
   
-        > .Row {
+        > .row {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 0.6em;
+          margin-bottom: 0.4em;
   
-          > .row-letter {
+          > input{
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #1f2436;
-            width: 4em;
-            height: 4em;
-            margin-right: 0.3em;
-            margin-left: 0.3em;
+            width: 2em;
+            height: 2em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
             color: white;
             border-radius: 10px;
             border: 2px solid #414358;
+            font-family: DynaPuff;
+            font-size: 2em;
+            text-align: center;
+            text-transform: uppercase;
+            caret-color: transparent;
+            outline: none;
           }
         }
       }
