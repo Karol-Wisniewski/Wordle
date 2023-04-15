@@ -1,6 +1,6 @@
 const words = [
     'stoły',
-    'sełce',
+    'serce',
     'stłuc',
     'słoty',
     'żabka',
@@ -14,6 +14,9 @@ const words = [
     'ławka',
     'rower',
     'pismo',
+    'rzeka',
+    'stopa',
+    'piłka',
 ];
 
 module.exports = {words}

@@ -1,5 +1,5 @@
 import '../App.scss';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, createRef } from 'react';
 import React from 'react';
 import words from '../Components/Words.js';
 
@@ -22,15 +22,7 @@ function Game() {
     { input1: '', input2: '', input3: '', input4: '', input5: '' },
   ]);
 
-  const inputRefs = useRef(
-    [
-      React.createRef(), 
-      React.createRef(), 
-      React.createRef(), 
-      React.createRef(),
-      React.createRef()
-    ]
-  );
+  const inputRefs = useRef(Array(5).fill(0).map(() => createRef()));
 
   function goToTheNextRow() {
     if (activeRow < rows.length - 1) {
@@ -79,7 +71,7 @@ function Game() {
     }
   }
 
-  function checkWord(value, index) {
+  function changeLettersColors(value, index) {
     const letters = word.split('');
     const letter = value.toLowerCase();
   
@@ -92,16 +84,25 @@ function Game() {
     }
   }
 
+  function checkWordMatch(userInput, word) {
+    for (let i = 0; i < word.length; i++) {
+      if (userInput[i] !== word[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   function compareInputWithWord(index) {
     const userInput = Object.values(rows[activeRow]);
-    const isWordinTheList = words.words.includes(userInput.join(''));
+    const isWordinTheList = words.words.includes(userInput.join('')) ;
   
     if (isWordinTheList && index === 4) {
       // Win condition function checks if the word contains all the letters from 'word' and if the indexes of the letters are the same
-      const winCondition = userInput.length === word.length && userInput.every((letter) => word.includes(letter)) && word.split('').every((letter) => userInput.includes(letter));
+      const winCondition = checkWordMatch(userInput, word.split(''));
       console.log(userInput);
       console.log(word.split(''));
-      userInput.forEach(checkWord);
+      userInput.forEach(changeLettersColors);
       if (winCondition) {
         setMsg('You won!');
         setGameEnded(true);
