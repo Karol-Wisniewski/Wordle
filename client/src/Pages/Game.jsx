@@ -11,6 +11,8 @@ function Game() {
 
   const [word, setWord] = useState('');
 
+  const [gameEnded, setGameEnded] = useState(false);
+
   const [rows, setRows] = useState([
     { input1: '', input2: '', input3: '', input4: '', input5: '' },
     { input1: '', input2: '', input3: '', input4: '', input5: '' },
@@ -35,6 +37,7 @@ function Game() {
       setActiveRow((prevActiveRow) => prevActiveRow + 1);
     } else {
       setMsg('Game over!');
+      setGameEnded(true);
     }
   }
 
@@ -101,6 +104,7 @@ function Game() {
       userInput.forEach(checkWord);
       if (winCondition) {
         setMsg('You won!');
+        setGameEnded(true);
       } else {
         goToTheNextRow();
       }
@@ -142,7 +146,7 @@ function Game() {
                       event.preventDefault();
                     }}
                   }
-                  disabled={rowIndex !== activeRow}
+                  disabled={gameEnded || rowIndex !== activeRow}
                 />
               ))}
             </div>
