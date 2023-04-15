@@ -204,7 +204,80 @@ body, html {
             caret-color: transparent;
             outline: none;
           }
+
+          > .green {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f2436;
+            width: 2em;
+            height: 2em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid #414358;
+            font-family: DynaPuff;
+            font-size: 2em;
+            text-align: center;
+            text-transform: uppercase;
+            caret-color: transparent;
+            outline: none;
+            background-color: #78B851;
+          }
+
+          > .yellow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f2436;
+            width: 2em;
+            height: 2em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid #414358;
+            font-family: DynaPuff;
+            font-size: 2em;
+            text-align: center;
+            text-transform: uppercase;
+            caret-color: transparent;
+            outline: none;
+            background-color: #F3C236;
+          }
+
+          > .grey {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f2436;
+            width: 2em;
+            height: 2em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid #414358;
+            font-family: DynaPuff;
+            font-size: 2em;
+            text-align: center;
+            text-transform: uppercase;
+            caret-color: transparent;
+            outline: none;
+            background-color: #414358;
+          }
         }
+      }
+
+      > .msg-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-family: DynaPuff;
+        font-size: 1.6em;
       }
     }
   }

@@ -1,5 +1,8 @@
 const words = [
     'stoły',
+    'sełce',
+    'stłuc',
+    'słoty',
     'żabka',
     'kwota',
     'mleko',
