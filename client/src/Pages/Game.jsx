@@ -15,14 +15,13 @@ function Game() {
 
   const [gameEnded, setGameEnded] = useState(false);
 
-  const [rows, setRows] = useState([
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-    { input1: '', input2: '', input3: '', input4: '', input5: '' },
-  ]);
+  const [rows, setRows] = useState(Array(6).fill(0).map(() => ({
+    input1: '',
+    input2: '',
+    input3: '',
+    input4: '',
+    input5: '',
+  })));
 
   const inputRefs = useRef(Array(5).fill(0).map(() => createRef()));
 
@@ -102,8 +101,6 @@ function Game() {
     if (isWordinTheList && index === 4) {
       // Win condition function checks if the word contains all the letters from 'word' and if the indexes of the letters are the same
       const winCondition = checkWordMatch(userInput, randomWord.split(''));
-      // console.log(userInput);
-      // console.log(randomWord.split(''));
       userInput.forEach(changeLettersColors);
       if (winCondition) {
         setMsg('You won!');
@@ -128,7 +125,6 @@ function Game() {
     axios.get('http://localhost:5000/words').then((response) => {
       const randomWord = response.data[Math.floor(Math.random() * response.data.length)];
       console.log("random word: " + randomWord);
-      console.log(response.data);
       setWords(response.data);
       setRandomWord(randomWord);
     });
