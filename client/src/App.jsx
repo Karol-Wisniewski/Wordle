@@ -5,6 +5,7 @@ import Header from './Components/Header';
 import Rules from './Pages/Rules';
 
 function App() {
+  
   return (
     <div className="App">
       <Header />

@@ -15,6 +15,8 @@ function Game() {
 
   const [gameEnded, setGameEnded] = useState(false);
 
+  const [lastTarget, setLastTarget] = useState(0);
+
   const [rows, setRows] = useState(Array(6).fill(0).map(() => ({
     input1: '',
     input2: '',
@@ -28,6 +30,7 @@ function Game() {
   function goToTheNextRow() {
     if (activeRow < rows.length - 1) {
       setActiveRow((prevActiveRow) => prevActiveRow + 1);
+      setLastTarget(0);
     } else {
       setMsg('Game over!');
       setGameEnded(true);
@@ -49,6 +52,7 @@ function Game() {
     // Focus on the next input when a letter is entered
     if (value && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].current.focus();
+      setLastTarget(index + 1);
     }  
   }  
 
@@ -66,6 +70,7 @@ function Game() {
       // Focus on the previous input when the backspace key is pressed
       if (index > 0) {
         inputRefs.current[index - 1].current.focus();
+        setLastTarget(index - 1);
       }     
     } else if (event.key === 'Enter') {
       compareInputWithWord(index);
@@ -135,7 +140,7 @@ function Game() {
       <div className="game-div">
         <div className="rows-div">
           {rows.map((row, rowIndex) => (
-            <div className="row" key={rowIndex}>
+            <div key={rowIndex} className="row">
               {Object.keys(row).map((inputId, index) => (
                 <input
                   key={inputId}
@@ -152,14 +157,22 @@ function Game() {
                       event.preventDefault();
                     }}
                   }
+                  //focus on the last input when the user clicks elsewhere
+                  onBlur={(e) => {
+                    if (e.relatedTarget === null) {
+                      inputRefs.current[lastTarget].current.focus();
+                    }
+                  }}
                   disabled={gameEnded || rowIndex !== activeRow}
+                  //prevent the user from selecting input manually
+                  onMouseDown={(e) => e.preventDefault()}
                 />
               ))}
             </div>
           ))}
         </div>
         <div className="msg-div">
-          {msg}
+          <p>{msg}</p>
         </div>
       </div>
     </div>

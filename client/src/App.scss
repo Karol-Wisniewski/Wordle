@@ -37,23 +37,13 @@ body, html {
         cursor: pointer;
         outline: none;
         color: white;
-        width: 4.5em;
+        width: 3em;
         height: 2.5em;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         border-radius: 5px;
         margin-right: 5px;
-
-        > span {
-          height: 50%;
-          margin: 0;
-          padding: 0;
-          font-size: 100%;
-          margin-left: 5px;
-          margin-bottom: 1px;
-          font-weight: 600;
-        }
 
         > img {
           width: 100%;
@@ -68,7 +58,7 @@ body, html {
         cursor: pointer;
         outline: none;
         color: white;
-        width: 3.5em;
+        width: 3.2em;
         height: 2.5em;
         display: flex;
         align-items: center;
@@ -79,7 +69,31 @@ body, html {
           width: 100%;
           height: 100%;
           border-radius: 3px;
+          scale: 0.9;
           filter: invert(-100%);
+        }
+      }
+
+      > :nth-child(3) {
+        border: none;
+        background-color: #5b5e7abe;
+        cursor: pointer;
+        outline: none;
+        color: white;
+        width: 3em;
+        height: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 5px;
+        margin-left: 5px;
+
+        > img {
+          width: 100%;
+          height: 100%;
+          border-radius: 3px;
+          filter: invert(-100%);
+          scale: 0.7;
         }
       }
     }
@@ -245,13 +259,16 @@ body, html {
       }
 
       > .msg-div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        font-family: DynaPuff;
-        font-size: 1.6em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1em;
+          margin-bottom: 1em;
+
+        > p {
+          font-family: DynaPuff;
+          font-size: 1.6em;
+        }
       }
 
       //smooth zoom in-out animation for win message

@@ -5,6 +5,7 @@ import polishFlag from '../Utils/polishFlag.png';
 import statistics from '../Utils/statistics.png';
 import settings from '../Utils/settings.png';
 import question from '../Utils/question.png';
+import refresh from '../Utils/refresh.png';
 
 function Header() {
   return (
@@ -12,11 +13,13 @@ function Header() {
       <div className="header-left">
         <button>
             <img src={polishFlag} alt="pl-flag" />
-            <span>PL</span>
         </button>
         <button>
             <img src={plus} alt="plus" />
         </button>
+        <button>
+              <img src={refresh} alt="refresh" onClick={() => window.location.reload()} />
+            </button>
       </div>
       <div className="header-mid">
         <button>
