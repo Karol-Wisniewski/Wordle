@@ -1,7 +1,7 @@
 import '../App.scss';
 import { useState, useEffect, useRef, createRef } from 'react';
 import React from 'react';
-import words from '../Components/Words.js';
+import axios from 'axios';
 
 function Game() {
 
@@ -9,7 +9,9 @@ function Game() {
 
   const [msg, setMsg] = useState('');
 
-  const [word, setWord] = useState('');
+  const [words, setWords] = useState([]);
+
+  const [randomWord, setRandomWord] = useState('');
 
   const [gameEnded, setGameEnded] = useState(false);
 
@@ -72,7 +74,7 @@ function Game() {
   }
 
   function changeLettersColors(value, index) {
-    const letters = word.split('');
+    const letters = randomWord.split('');
     const letter = value.toLowerCase();
   
     if (letters[index] === letter) {
@@ -95,16 +97,18 @@ function Game() {
 
   function compareInputWithWord(index) {
     const userInput = Object.values(rows[activeRow]);
-    const isWordinTheList = words.words.includes(userInput.join('')) ;
+    const isWordinTheList = words.includes(userInput.join('')) ;
   
     if (isWordinTheList && index === 4) {
       // Win condition function checks if the word contains all the letters from 'word' and if the indexes of the letters are the same
-      const winCondition = checkWordMatch(userInput, word.split(''));
-      console.log(userInput);
-      console.log(word.split(''));
+      const winCondition = checkWordMatch(userInput, randomWord.split(''));
+      // console.log(userInput);
+      // console.log(randomWord.split(''));
       userInput.forEach(changeLettersColors);
       if (winCondition) {
         setMsg('You won!');
+        //add animation style to msg div
+        document.getElementsByClassName('msg-div')[0].classList.add('win');
         setGameEnded(true);
       } else {
         goToTheNextRow();
@@ -121,8 +125,13 @@ function Game() {
   }, [activeRow, inputRefs]);
 
   useEffect(() => {
-    const randomWord = words.words[Math.floor(Math.random() * words.words.length)];
-    setWord(randomWord);
+    axios.get('http://localhost:5000/words').then((response) => {
+      const randomWord = response.data[Math.floor(Math.random() * response.data.length)];
+      console.log("random word: " + randomWord);
+      console.log(response.data);
+      setWords(response.data);
+      setRandomWord(randomWord);
+    });
   }, []);
 
   return (

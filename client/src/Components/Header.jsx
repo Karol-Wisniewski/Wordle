@@ -1,4 +1,5 @@
 import '../App.scss';
+import { Link } from 'react-router-dom';
 import plus from '../Utils/plus.png';
 import polishFlag from '../Utils/polishFlag.png';
 import statistics from '../Utils/statistics.png';
@@ -18,7 +19,9 @@ function Header() {
         </button>
       </div>
       <div className="header-mid">
-        Wordle
+        <button>
+          <Link className="link" to="/">Wordle</Link>
+        </button>
       </div>
       <div className="header-right">
         <button>
@@ -28,7 +31,9 @@ function Header() {
             <img src={settings} alt="settings" />
         </button>
         <button>
-        <img src={question} alt="question" />
+          <Link className="link" to="/rules">
+            <img src={question} alt="question" />
+          </Link>
         </button>
       </div>
     </div>
