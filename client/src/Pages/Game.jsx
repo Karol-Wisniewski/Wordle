@@ -1,20 +1,16 @@
 import '../App.scss';
 import { useState, useEffect, useRef, createRef } from 'react';
+import Confetti from "react-confetti";
 import React from 'react';
 import axios from 'axios';
 
 function Game() {
 
   const [activeRow, setActiveRow] = useState(0);
-
   const [msg, setMsg] = useState('');
-
   const [words, setWords] = useState([]);
-
   const [randomWord, setRandomWord] = useState('');
-
   const [gameEnded, setGameEnded] = useState(false);
-
   const [lastTarget, setLastTarget] = useState(0);
 
   const [rows, setRows] = useState(Array(6).fill(0).map(() => ({
@@ -57,6 +53,9 @@ function Game() {
   }  
 
   function handleKeyDown(event, inputId, index) {
+    if (event.key === 'Backspace') {
+      setMsg("");
+    }
     if (event.key === 'Backspace' && !event.target.value) {
       setRows((prevRows) => {
         const updatedRows = [...prevRows];
@@ -66,7 +65,7 @@ function Game() {
         };
         return updatedRows;
       });
-  
+
       // Focus on the previous input when the backspace key is pressed
       if (index > 0) {
         inputRefs.current[index - 1].current.focus();
@@ -99,6 +98,13 @@ function Game() {
     return true;
   }
 
+  function setConfetti() {
+    document.getElementsByClassName('confetti')[0].classList.add('confetti-visible');
+    setTimeout(() => {
+      document.getElementsByClassName('confetti')[0].classList.remove('confetti-visible');
+    }, 2500);
+  }
+
   function compareInputWithWord(index) {
     const userInput = Object.values(rows[activeRow]);
     const isWordinTheList = words.includes(userInput.join('')) ;
@@ -109,7 +115,7 @@ function Game() {
       userInput.forEach(changeLettersColors);
       if (winCondition) {
         setMsg('You won!');
-        //add animation style to msg div
+        setConfetti();
         document.getElementsByClassName('msg-div')[0].classList.add('win');
         setGameEnded(true);
       } else {
@@ -137,6 +143,7 @@ function Game() {
 
   return (
     <div className="Game">
+      <Confetti className="confetti" />
       <div className="game-div">
         <div className="rows-div">
           {rows.map((row, rowIndex) => (
@@ -151,7 +158,7 @@ function Game() {
                   onInput={(event) => handleInputChange(event, inputId, index)}
                   onKeyDown={(event) => {
                     if (event.key === 'Backspace' || event.key === 'Enter') {
-                      handleKeyDown(event, inputId, index)
+                      handleKeyDown(event, inputId, index);
                     //include only letters (also polish) in the input
                     } else if (!event.key.match(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/)) {
                       event.preventDefault();

@@ -207,6 +207,16 @@ body, html {
     color: white;
     width: 40%;
 
+    > .confetti {
+      opacity: 0;
+      transition: opacity 3s ease-in-out;
+    }
+
+    > .confetti-visible {
+      opacity: 1;
+      transition: opacity 2s ease-in-out;
+    }
+
     > .game-div {
       display: flex;
       flex-direction: column;
