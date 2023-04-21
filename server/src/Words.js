@@ -387,6 +387,11 @@ const words = [
     'życie',
     'żniwo',
     'garda',
+    'gołąb',
+    'walka',
+    'całka',
+    'skóra',
+    'wanna'
 ];
 
 export default words;
