@@ -126,17 +126,29 @@ function Game() {
     }
   }
 
+  const getAllWords = async () => {
+    return axios.get(`http://localhost:5000/words`, {
+        withCredentials: true
+    })
+    .then(res => {
+        return res.data
+    })
+    .catch(err => console.log(err))
+  };
+
   useEffect(() => {
+    // Focus first input in the first row on page load
     if (inputRefs.current[0]) {
       inputRefs.current[0].current.focus();
     }
   }, [activeRow, inputRefs]);
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/words').then((response) => {
-      const randomWord = response.data[Math.floor(Math.random() * response.data.length)];
-      console.log("random word: " + randomWord);
-      setWords(response.data);
+  useEffect(() =>{
+    getAllWords().then((response) => {
+      const words = response.map((word) => word.word);
+      const randomWord = words[Math.floor(Math.random() * response.length)];
+      console.log("Word to guess: " + randomWord);
+      setWords(words);
       setRandomWord(randomWord);
     });
   }, []);

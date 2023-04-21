@@ -389,6 +389,4 @@ const words = [
     'garda',
 ];
 
-module.exports = {
-    words,
-};
+export default words;
