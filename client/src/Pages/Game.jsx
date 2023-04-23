@@ -167,7 +167,17 @@ function Game() {
                   type="text"
                   maxLength="1"
                   value={row[inputId]}
-                  onInput={(event) => handleInputChange(event, inputId, index)}
+                  onInput={(e) => {
+                      handleInputChange(e, inputId, index)
+                      //add class for 0.5 sec to animate the input (dont do it if user deletes the letter)
+                      if (e.target.value) {
+                        e.target.classList.add('input-clicked');
+                        setTimeout(() => {
+                          e.target.classList.remove('input-clicked');
+                        }, 200);
+                      }
+                    }
+                  }
                   onKeyDown={(event) => {
                     if (event.key === 'Backspace' || event.key === 'Enter') {
                       handleKeyDown(event, inputId, index);
