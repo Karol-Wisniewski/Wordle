@@ -23,60 +23,214 @@ body, html {
     min-height: 100vh;
 
     > .home-left {
-      flex: 0.25;
+      flex: 0.65;
       display: flex;
       flex-direction: column;
       background-color:#1f2436;
-    }
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
 
-    > .home-middle {
-      flex: 0.5;
-      display: flex;
-      z-index: 1;
-      flex-direction: column;
-      -webkit-box-shadow: 2px 7px 24px 9px rgb(0, 0, 0);
-      -moz-box-shadow: 2px 7px 24px 9px rgb(0, 0, 0);
-      box-shadow: 2px 7px 24px 9px rgb(0, 0, 0);
-
-      > h1 {
-        margin-top: 3em;
-        font-family: DynaPuff;
-        font-size: 3em;
+      @media (max-width: 700px) {
+        flex: 1;
       }
 
-      > div {
-        margin-top: 5em;
+      > .home-left-div {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
 
-        > button {
-          border: none;
-          background-color: #5b5e7abe;
-          cursor: pointer;
-          outline: none;
-          color: white;
-          width: 6em;
-          height: 2em;
-          border-radius: 5px;
-          font-family: DynaPuff;
-          font-size: 1.5em;
-          transition: background-color 0.5s ease;
-          margin-left: 1em;
-          margin-right: 1em;
+        > .home-left-logo-div {
+          display: flex;
+          position: absolute;
+          justify-content: center;
+          align-self: flex-start;
+          align-items: center;
+          top: 7%;
+          left: 4%;
+  
+          > img {
+            max-width: 3em;
+            max-height: 3em;
+            border-radius: 5%;
+          }
+  
+          > b {
+            font-family: DynaPuff;
+            font-size: 2em;
+            margin-left: 0.5em;
+          }
         }
+  
+        > h1 {
+          font-family: Acme;
+          font-size: 3em;
+          margin-bottom: 50px;
+          letter-spacing: 2px;
+          padding-left: 1em;
+          padding-right: 1em;
 
-        > button:hover {
-          background-color: #4d8d62;
-          transition: background-color 0.5s ease;
+          @media (max-width: 700px) {
+            font-size: 2em;
+          }
+        }
+  
+        > .home-left-form-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+  
+          > hr {
+            width: 21em;
+            border: 1px solid #5b5e7abe;
+            margin-bottom: 50px;
+
+            @media (max-width: 700px) {
+              width: 10em;
+            }
+          }
+  
+          > form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+  
+            > input {
+              border: none;
+              background-color: #5b5e7abe;
+              outline: none;
+              color: white;
+              height: 2em;
+              width: 30%;
+              border-radius: 50px;
+              font-family: Acme;
+              font-size: 1.5em;
+              margin-bottom: 1em;
+              padding-left: 1em;
+
+              @media (max-width: 700px) {
+                font-size: 1em;
+              }
+            }
+          }
+  
+          > button {
+            border: none;
+            background-color: #5b5e7abe;
+            outline: none;
+            color: white;
+            height: 2em;
+            border-radius: 50px;
+            font-family: Acme;
+            font-size: 1.5em;
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-top: 2em;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+          }
+  
+          > button:hover {
+            background-color: #70ca9d;
+            transition: background-color 0.5s ease;
+          }
+
+          > .register-btn {
+            display: none;
+
+            @media (max-width: 700px) {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: none;
+              background-color: #5b5e7abe;
+              outline: none;
+              color: white;
+              height: 2em;
+              border-radius: 50px;
+              font-family: Acme;
+              font-size: 1.5em;
+              padding-left: 2em;
+              padding-right: 2em;
+              margin-top: 2em;
+              cursor: pointer;
+              transition: background-color 0.5s ease;
+            }
+          }
+
+          > .register-btn:hover {
+            background-color: #70ca9d;
+            transition: background-color 0.5s ease;
+          }
         }
       }
     }
 
     > .home-right {
-      flex: 0.25;
       display: flex;
-      flex-direction: column;
-      background-color: #1f2436;
+      justify-content: center;
+      align-items: center;
+      flex: 0.35;
+      height: 100vh;
+
+      @media (max-width: 700px) {
+        display: none;
+      }
+
+      > .home-right-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        > b {
+          font-family: Acme;
+          font-size: 2em;
+          margin-top: 0.5em;
+          letter-spacing: 1px;
+        }
+
+        > :nth-child(1) {
+          margin-top: 0;
+        }
+  
+        > p {
+          font-family: Acme;
+          font-size: 1.4em;
+          margin-top: 5em;
+          width: 50%;
+        }
+  
+        > button {
+          border: none;
+          background-color: #5b5e7abe;
+          outline: none;
+          color: white;
+          height: 2em;
+          border-radius: 50px;
+          font-family: Acme;
+          font-size: 1.5em;
+          padding-left: 2em;
+          padding-right: 2em;
+          margin-top: 2em;
+          cursor: pointer;
+          transition: background-color 0.5s ease;
+        }
+  
+        > button:hover {
+          background-color: #70ca9d;
+          transition: background-color 0.5s ease;
+        }
+      }
     }
   }
 
