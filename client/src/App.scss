@@ -219,11 +219,18 @@ body, html {
           border-radius: 50px;
           font-family: Acme;
           font-size: 1.5em;
-          padding-left: 2em;
-          padding-right: 2em;
           margin-top: 2em;
           cursor: pointer;
           transition: background-color 0.5s ease;
+
+          > .link {
+            text-decoration: none;
+            color: white;
+            padding-left: 2em;
+            padding-right: 2em;
+            height: 100%;
+            width: 100%;
+          }
         }
   
         > button:hover {

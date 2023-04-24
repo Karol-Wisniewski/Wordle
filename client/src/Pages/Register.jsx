@@ -1,5 +1,6 @@
 import '../App.scss';
 import logo from '../Utils/logo.PNG'
+import { Link } from 'react-router-dom';
 
 function Register() {
   return (
@@ -21,7 +22,7 @@ function Register() {
                         Sign up
                     </button>
                     <button className="register-btn">
-                        Sign in
+                        <Link className="link" to="/">Sign in</Link>
                     </button>
                 </div>
             </div>
@@ -32,7 +33,7 @@ function Register() {
                 <b>Login to play!</b>
                 <p>Don't miss out on our daily challenges!</p>
                 <button>
-                        Sign in
+                    <Link className="link" to="/">Sign in</Link>
                 </button>
             </div>
         </div>

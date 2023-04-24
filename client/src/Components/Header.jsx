@@ -23,7 +23,7 @@ function Header() {
       </div>
       <div className="header-mid">
         <button>
-          <Link className="link" to="/">Wordle</Link>
+          <Link className="link" to="/game">Wordle</Link>
         </button>
       </div>
       <div className="header-right">
@@ -34,7 +34,7 @@ function Header() {
             <img src={settings} alt="settings" />
         </button>
         <button>
-          <Link className="link" to="/rules">
+          <Link className="link" to="rules">
             <img src={question} alt="question" />
           </Link>
         </button>

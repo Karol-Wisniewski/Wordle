@@ -1,5 +1,6 @@
 import '../App.scss';
 import logo from '../Utils/logo.PNG'
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -21,11 +22,8 @@ function Login() {
                     <button>
                         Sign in
                     </button>
-                    <button 
-                        className="register-btn"
-                        // onClick={() => navigate('/register')}
-                    >
-                        Sign up
+                    <button className="register-btn">
+                        <Link className="link" to="/register">Sign up</Link>
                     </button>
                 </div>
             </div>
@@ -36,7 +34,7 @@ function Login() {
                 <b>Register to play!</b>
                 <p>Register now, solve your wordles and be better than everybody!</p>
                 <button>
-                        Sign up
+                    <Link className="link" to="/register">Sign up</Link>
                 </button>
             </div>
         </div>

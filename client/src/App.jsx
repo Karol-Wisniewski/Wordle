@@ -1,5 +1,5 @@
 import './App.scss';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Game from './Pages/Game';
 import Header from './Components/Header';
 import Rules from './Pages/Rules';
@@ -10,21 +10,26 @@ function App() {
 
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Login />
+      <Routes>
+        <Route exact path="/" element={<Login />}>
         </Route>
-        <Route path="/register">
-          <Register />
+        <Route path="/register" element={<Register />}>
         </Route>
-        <Route exact path="/game">
-          <Header />
-          <Game />
+        <Route exact path="/game" element={
+          <>
+            <Header />
+            <Game />
+          </>
+        }>
         </Route>
-        <Route path="/game/rules">
-          <Rules />
+        <Route exact path="/game/rules" element={
+          <>
+            <Header />
+            <Rules />
+          </>
+        }>
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 }
