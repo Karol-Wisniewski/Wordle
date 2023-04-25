@@ -11,10 +11,10 @@ function Header() {
   return (
     <div className="Header">
       <div className="header-left">
-        <button>
+        <button disabled={true}>
             <img src={polishFlag} alt="pl-flag" />
         </button>
-        <button>
+        <button disabled={true}>
             <img src={plus} alt="plus" />
         </button>
         <button>
@@ -27,10 +27,10 @@ function Header() {
         </button>
       </div>
       <div className="header-right">
-        <button>
+        <button disabled={true}>
             <img src={statistics} alt="statistics" />
         </button>
-        <button>
+        <button disabled={true}>
             <img src={settings} alt="settings" />
         </button>
         <button>

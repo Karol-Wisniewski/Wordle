@@ -1,7 +1,7 @@
 import "../App.scss";
 
 const VirtualKeyboard = ({ onKeyPress, usedLetters }) => {
-  const letters = 'QWERTYUIOPASDFGHJKLZXCVBNMĄĆĘŁŃÓŚŹŻ'.toLowerCase();
+  const letters = 'QWERTYUIOPASDFGHJKLZXCVBNMĄĆĘŁŃÓŚŹŻ';
 
   const handleClick = (letter) => {
     onKeyPress(letter);

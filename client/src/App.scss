@@ -489,17 +489,17 @@ body, html {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 0.55em;
   
           > input{
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #1f2436;
-            width: 2em;
-            height: 2em;
-            margin-right: 0.15em;
-            margin-left: 0.15em;
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
+            margin-bottom: 0.2em;
             color: white;
             border-radius: 10px;
             border: 2px solid #414358;
@@ -517,7 +517,7 @@ body, html {
             scale: 1.1;
             background-color: #2b3249;
             transition: scale 0.2s ease;
-            transition: background-color 0.2sease;
+            transition: background-color 0.2 ease;
           }
 
           > .green {
@@ -552,7 +552,7 @@ body, html {
         flex-wrap: wrap;
         justify-content: center;
         align-self: center;
-        width: 75%;
+        width: 80%;
         margin-top: -1.5em;
 
         > .key {

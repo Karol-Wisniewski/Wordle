@@ -57,24 +57,25 @@ function Game() {
   }
 
   function handleInputChangeFromKeyboard(key, inputId, index) {
-
-    if (!inputRefs.current[index].current.value) {
-      setRows((prevRows) => {
-        const updatedRows = [...prevRows];
-        updatedRows[activeRow] = {
-          ...updatedRows[activeRow],
-          [inputId]: key.toUpperCase(),
-        };
-        return updatedRows;
-      });
+    if (!gameEnded) {
+      if (!inputRefs.current[index].current.value) {
+        setRows((prevRows) => {
+          const updatedRows = [...prevRows];
+          updatedRows[activeRow] = {
+            ...updatedRows[activeRow],
+            [inputId]: key.toUpperCase(),
+          };
+          return updatedRows;
+        });
+      }
+    
+      // Focus on the next input when a letter is entered
+      if (index < inputRefs.current.length - 1) {
+        inputRefs.current[index + 1].current.focus();
+        setLastTarget(index + 1);
+      }
     }
-  
-    // Focus on the next input when a letter is entered
-    if (index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1].current.focus();
-      setLastTarget(index + 1);
-    }
-  }  
+  }
 
   function handleInputChange(event, inputId, index) {
     const value = event.target.value;
@@ -96,7 +97,7 @@ function Game() {
   }  
 
   function handleKeyDownFromKeyboard(key, inputId, index) {
-    if (key === 'Backspace') {
+    if (key === 'Backspace' && !gameEnded) {
       setMsg("");
 
       const condition = index === 0 && inputRefs.current[index].current.value === ''
@@ -119,13 +120,13 @@ function Game() {
         inputRefs.current[index - 1].current.focus();
         setLastTarget(index - 1);
       } 
-    } else if (key === 'Enter') {
+    } else if (key === 'Enter' && !gameEnded) {
       compareInputWithWord(index);
     }
   }
 
   function handleKeyDownFromKeyboardLast(key, inputId, index) {
-    if (key === 'Backspace') {
+    if (key === 'Backspace' && !gameEnded) {
       setMsg("");
       setRows((prevRows) => {
         const updatedRows = [...prevRows];
@@ -140,7 +141,7 @@ function Game() {
       if (index > 0) {
         inputRefs.current[index - 1].current.focus();
       }
-    } else if (key === 'Enter') {
+    } else if (key === 'Enter' && !gameEnded) {
       compareInputWithWord(index);
     }
   }
