@@ -529,7 +529,7 @@ body, html {
           }
 
           > .grey {
-            background-color: #414358;
+            background-color: #242733;
           }
         }
       }
@@ -539,12 +539,63 @@ body, html {
           align-items: center;
           justify-content: center;
           margin-top: 1em;
-          margin-bottom: 1em;
+          margin-bottom: 2em;
 
         > p {
           font-family: DynaPuff;
           font-size: 1.6em;
         }
+      }
+
+      > .virtual-keyboard {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-self: center;
+        width: 75%;
+        margin-top: -1.5em;
+
+        > .key {
+          border: 1px solid #414358;
+          background-color: #262e4d;
+          color: white;
+          padding: 0.5rem 1rem;
+          font-size: 1.5rem;
+          margin: 0.2rem;
+          border-radius: 5px;
+          font-family: DynaPuff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        
+          &:hover {
+            background-color: #374166;
+          }
+        
+          &.used {
+            background-color: #ddd;
+            color: #aaa;
+            cursor: not-allowed;
+          }
+        
+          &.grey {
+            background-color: #242733;
+          }
+        
+          &.yellow {
+            background-color: #ffcc00;
+          }
+        
+          &.green {
+            background-color: #9ccc65;
+          }
+        }
+        
+        // > .key-backspace, .key-enter {
+        //   // text-align: center;
+        // }
       }
 
       //smooth zoom in-out animation for win message

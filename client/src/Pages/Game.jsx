@@ -3,8 +3,11 @@ import { useState, useEffect, useRef, createRef } from 'react';
 import Confetti from "react-confetti";
 import React from 'react';
 import axios from 'axios';
+import VirtualKeyboard from '../Components/VirtualKeyboard';
 
 function Game() {
+
+  const letters = "AĄBCĆDEĆFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ";
 
   const [activeRow, setActiveRow] = useState(0);
   const [msg, setMsg] = useState('');
@@ -12,6 +15,12 @@ function Game() {
   const [randomWord, setRandomWord] = useState('');
   const [gameEnded, setGameEnded] = useState(false);
   const [lastTarget, setLastTarget] = useState(0);
+  const [usedLetters, setUsedLetters] = useState(
+    letters.split("").reduce((acc, letter) => {
+      acc[letter] = "";
+      return acc;
+    }, {})
+  );
 
   const [rows, setRows] = useState(Array(6).fill(0).map(() => ({
     input1: '',
@@ -33,6 +42,40 @@ function Game() {
     }
   }
 
+  function handleKeyPress(key) {
+    const currentInputIdEnter = `input${lastTarget + 1}`;
+    const currentInputIdBackspace = `input${lastTarget}`;
+    if ((key === 'Backspace' && lastTarget === 4 && inputRefs.current[lastTarget].current.value !== '')) {
+      handleKeyDownFromKeyboardLast(key, currentInputIdEnter, lastTarget);
+    } else if (key === 'Backspace') {
+      handleKeyDownFromKeyboard(key, currentInputIdBackspace, lastTarget);
+    } else if (key === 'Enter') {
+      handleKeyDownFromKeyboard(key, currentInputIdEnter, lastTarget);
+    } else if (letters.includes(key.toUpperCase())) {
+      handleInputChangeFromKeyboard(key, currentInputIdEnter, lastTarget);
+    }
+  }
+
+  function handleInputChangeFromKeyboard(key, inputId, index) {
+
+    if (!inputRefs.current[index].current.value) {
+      setRows((prevRows) => {
+        const updatedRows = [...prevRows];
+        updatedRows[activeRow] = {
+          ...updatedRows[activeRow],
+          [inputId]: key.toUpperCase(),
+        };
+        return updatedRows;
+      });
+    }
+  
+    // Focus on the next input when a letter is entered
+    if (index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1].current.focus();
+      setLastTarget(index + 1);
+    }
+  }  
+
   function handleInputChange(event, inputId, index) {
     const value = event.target.value;
 
@@ -51,6 +94,56 @@ function Game() {
       setLastTarget(index + 1);
     }  
   }  
+
+  function handleKeyDownFromKeyboard(key, inputId, index) {
+    if (key === 'Backspace') {
+      setMsg("");
+
+      const condition = index === 0 && inputRefs.current[index].current.value === ''
+
+      if (!condition) {
+        setRows((prevRows) => {
+          const updatedRows = [...prevRows];
+          updatedRows[activeRow] = {
+            ...updatedRows[activeRow],
+            [inputId]: '',
+          };
+          return updatedRows;
+        });
+      } else {
+        inputRefs.current[index].current.focus();
+      }
+
+      // Focus on the previous input when the backspace key is pressed
+      if (index > 0) {
+        inputRefs.current[index - 1].current.focus();
+        setLastTarget(index - 1);
+      } 
+    } else if (key === 'Enter') {
+      compareInputWithWord(index);
+    }
+  }
+
+  function handleKeyDownFromKeyboardLast(key, inputId, index) {
+    if (key === 'Backspace') {
+      setMsg("");
+      setRows((prevRows) => {
+        const updatedRows = [...prevRows];
+        updatedRows[activeRow] = {
+          ...updatedRows[activeRow],
+          [inputId]: '',
+        };
+        return updatedRows;
+      });
+
+      // Focus on the previous input when the backspace key is pressed
+      if (index > 0) {
+        inputRefs.current[index - 1].current.focus();
+      }
+    } else if (key === 'Enter') {
+      compareInputWithWord(index);
+    }
+  }
 
   function handleKeyDown(event, inputId, index) {
     if (event.key === 'Backspace') {
@@ -77,21 +170,33 @@ function Game() {
   }
 
   function changeLettersColors(value, index) {
-    const letters = randomWord.split('');
-    const letter = value.toLowerCase();
+    const letters = randomWord.toUpperCase().split('');
+    const letter = value.toUpperCase();
   
     if (letters[index] === letter) {
-      document.getElementsByClassName('row')[activeRow].childNodes[index].classList.add('green');
+      document.getElementsByClassName('row')[activeRow].childNodes[index].classList.add('green')
+      setUsedLetters((prevUsedLetters) => ({
+        ...prevUsedLetters,
+        [letter]: "green",
+      }));
     } else if (letters.includes(letter)) {
       document.getElementsByClassName('row')[activeRow].childNodes[index].classList.add('yellow');
+      setUsedLetters((prevUsedLetters) => ({
+        ...prevUsedLetters,
+        [letter]: "yellow",
+      }));
     } else {
       document.getElementsByClassName('row')[activeRow].childNodes[index].classList.add('grey');
+      setUsedLetters((prevUsedLetters) => ({
+        ...prevUsedLetters,
+        [letter]: "grey",
+      }));
     }
-  }
+  }  
 
   function checkWordMatch(userInput, word) {
     for (let i = 0; i < word.length; i++) {
-      if (userInput[i] !== word[i]) {
+      if (userInput[i].toLowerCase() !== word[i].toLowerCase()) {
         return false;
       }
     }
@@ -107,7 +212,8 @@ function Game() {
 
   function compareInputWithWord(index) {
     const userInput = Object.values(rows[activeRow]);
-    const isWordinTheList = words.includes(userInput.join('')) ;
+    console.log(userInput);
+    const isWordinTheList = words.includes(userInput.join('').toLowerCase());
   
     if (isWordinTheList && index === 4) {
       // Win condition function checks if the word contains all the letters from 'word' and if the indexes of the letters are the same
@@ -203,6 +309,10 @@ function Game() {
         <div className="msg-div">
           <p>{msg}</p>
         </div>
+        <VirtualKeyboard
+          onKeyPress={handleKeyPress}
+          usedLetters={usedLetters}
+        />
       </div>
     </div>
   );
