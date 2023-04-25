@@ -21,6 +21,10 @@ function Register() {
                     <button>
                         Sign up
                     </button>
+                    <div className="register-p-div">
+                        <p className="register-p">Already have an account?</p>
+                        <p className="register-p">Hop right in!</p>
+                    </div>
                     <button className="register-btn">
                         <Link className="link" to="/">Sign in</Link>
                     </button>

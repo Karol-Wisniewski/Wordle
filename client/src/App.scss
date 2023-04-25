@@ -51,6 +51,11 @@ body, html {
           align-items: center;
           top: 7%;
           left: 4%;
+
+          @media (max-width: 400px) {
+            align-self: center;
+            left: auto;
+          }
   
           > img {
             max-width: 3em;
@@ -75,6 +80,7 @@ body, html {
 
           @media (max-width: 700px) {
             font-size: 2em;
+            margin-bottom: 20px;
           }
         }
   
@@ -92,6 +98,7 @@ body, html {
 
             @media (max-width: 700px) {
               width: 10em;
+              margin-bottom: 30px;
             }
           }
   
@@ -117,6 +124,7 @@ body, html {
 
               @media (max-width: 700px) {
                 font-size: 1em;
+                width: 40%;
               }
             }
           }
@@ -142,6 +150,25 @@ body, html {
             transition: background-color 0.5s ease;
           }
 
+          > .register-p-div {
+            display: none;
+
+            @media (max-width: 700px) {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              color: white;
+              font-family: Acme;
+              font-size: 1.5em;
+              margin-top: 2em;
+
+              > .register-p {
+                margin-bottom: 0.1em;
+              }
+            }
+          };
+
           > .register-btn {
             display: none;
 
@@ -162,6 +189,11 @@ body, html {
               margin-top: 2em;
               cursor: pointer;
               transition: background-color 0.5s ease;
+
+              > .link {
+                text-decoration: none;
+                color: white;
+              }
             }
           }
 

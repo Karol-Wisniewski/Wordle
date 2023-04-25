@@ -22,6 +22,10 @@ function Login() {
                     <button>
                         Sign in
                     </button>
+                    <div className="register-p-div">
+                        <p className="register-p">New here?</p>
+                        <p className="register-p">Register to play!</p>
+                    </div>
                     <button className="register-btn">
                         <Link className="link" to="/register">Sign up</Link>
                     </button>
@@ -32,7 +36,7 @@ function Login() {
             <div className="home-right-div">
                 <b>New here? </b>
                 <b>Register to play!</b>
-                <p>Register now, solve your wordles and be better than everybody!</p>
+                <p>Register now, solve your wordles and be better than everyone!</p>
                 <button>
                     <Link className="link" to="/register">Sign up</Link>
                 </button>
