@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: keycloak-postgresql
+  labels:
+    app: baw-project
+    type: keycloak-postgresql
+spec:
+  containers:
+  - name: keycloak-postgresql
+    image: postgres:latest
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "128Mi"
+    ports:
+    - containerPort: 5432
+      protocol: TCP
+    volumeMounts:
+    - name: keycloak-postgresql-data
+      mountPath: /var/lib/postgresql/data
+      readOnly: false
+    - name: init-script
+      mountPath: /docker-entrypoint-initdb.d/
+    env:
+    - name: POSTGRES_USER
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-postgresql-auth
+          key: POSTGRES_USER
+    - name: POSTGRES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-postgresql-auth
+          key: POSTGRES_PASSWORD
+    - name: POSTGRES_DB
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-postgresql-auth
+          key: POSTGRES_DB
+  volumes:
+  - name: keycloak-postgresql-data
+    persistentVolumeClaim:
+      claimName: keycloak-postgresql-data
+  - name: init-script
+    configMap:
+      name: keycloak-postgresql-init-script

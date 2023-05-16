@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: keycloak
+  labels:
+    app: baw-project
+    type: keycloak
+spec:
+  containers:
+  - name: keycloak
+    image: quay.io/keycloak/keycloak:21.0.2
+    args: ["start-dev"]
+    resources:
+      limits:
+        cpu: "400m"
+        memory: "1828Mi"
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    env:
+      # - name: PROXY_ADDRESS_FORWARDING
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: keycloak-config
+      #       key: PROXY_ADDRESS_FORWARDING
+      - name: KEYCLOAK_ADMIN
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: KEYCLOAK_USER
+      - name: KEYCLOAK_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: KEYCLOAK_PASSWORD
+
+      # Czy to działa?
+      - name: DB_VENDOR
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_VENDOR
+      - name: DB_ADDR
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_ADDR
+      - name: DB_PORT
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_PORT
+      - name: DB_DATABASE
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_DATABASE
+      - name: DB_USER
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_USER
+      - name: DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-auth
+            key: DB_PASSWORD

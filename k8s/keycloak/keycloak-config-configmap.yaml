@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  PROXY_ADDRESS_FORWARDING: "true"
+
+
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+  labels:
+    app: baw-project
+    type: keycloak

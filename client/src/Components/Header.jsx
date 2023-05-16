@@ -34,7 +34,7 @@ function Header() {
             <img src={settings} alt="settings" />
         </button>
         <button>
-          <Link className="link" to="rules">
+          <Link className="link" to="/game/rules">
             <img src={question} alt="question" />
           </Link>
         </button>
